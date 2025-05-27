@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Student } from '../../models/student';
 
 @Component({
@@ -9,4 +9,8 @@ import { Student } from '../../models/student';
 })
 export class StudentCardComponent {
   @Input('student') st!: Student;
+  @Output() deletedStudent =  new EventEmitter<number>();
+  onDelete(){
+    this.deletedStudent.emit(this.st.id);
+  }
 }

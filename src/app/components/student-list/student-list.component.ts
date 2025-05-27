@@ -17,5 +17,8 @@ export class StudentListComponent implements OnInit {
   ngOnInit(): void {
     this.list = this._schoolService.getStudents();
   }
+  handleDelete(id:number){
+    const waDeleted  = this._schoolService.deleteStudent(id);
+  }
 
 }

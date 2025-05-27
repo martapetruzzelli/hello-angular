@@ -35,4 +35,10 @@ export class SchoolService{
   getStudents():Student[]{
     return this.list;
   }
+
+  deleteStudent(id:number):boolean{
+    const lengthBefore = this.list.length;
+    this.list = this.list.filter(s => s.id != id);
+    return this.list.length != lengthBefore;
+  }
 }

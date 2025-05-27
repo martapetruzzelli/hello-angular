@@ -18,4 +18,14 @@ export class StudentListComponent implements OnInit {
     this.list = this._schoolService.getStudents();
   }
 
+  handleDelete(obj:{id:number, name:string}){ //{id,name}:{id:number; name:string}
+    const {id, name} = obj;
+    const wasDeleted =  this._schoolService.deleteStudent(id);
+    if(wasDeleted){
+      alert("deletato studente " + name);
+    } else {
+      alert("errore nell'eliminazione dello studente " + name);
+    }
+  }
+
 }

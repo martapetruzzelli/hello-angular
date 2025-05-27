@@ -7,10 +7,11 @@ import { Student } from '../../models/student';
   templateUrl: './student-card.component.html',
   styleUrl: './student-card.component.css'
 })
-export class StudentCardComponent {
+export class StudentCardComponent { //Dumb component (non farà logica)
   @Input('student') st!: Student;
-  @Output() deletedStudent =  new EventEmitter<number>();
+  @Output('deleteStudent') deleteStudent = new EventEmitter<{id:number; name:string}>(); 
   onDelete(){
-    this.deletedStudent.emit(this.st.id);
+    //notifica la componente superiore, che è stato chaiamato delete
+    this.deleteStudent.emit({id:this.st.id, name:this.st.name});
   }
 }

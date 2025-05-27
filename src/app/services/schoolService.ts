@@ -34,15 +34,14 @@ export class SchoolService{
   ];
 
   getStudents():Student[]{
+    // chiamata del BE
+    // cose prima 
     return this.list;
   }
 
-  deleteStudent(id:number):boolean  {
+  deleteStudent(id:number):boolean{
     const beforeLength = this.list.length;
     this.list = this.list.filter((s)=>{s.id != id});
     return this.list.length != beforeLength;
   }
-
-
-
 }

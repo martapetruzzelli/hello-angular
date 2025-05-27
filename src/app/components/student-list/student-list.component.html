@@ -1,0 +1,17 @@
+<!-- <div *ngFor="let s of list">
+  <p>Nome: {{ s.name }}</p>
+  <p>Cognome: {{ s.lastname }}</p>
+  <p *ngIf="s.gender == 'female'">Stagista non retribuita</p>
+</div> -->
+
+@for (s of list; track s.id) {
+  <!-- <div>
+    <p>Nome: {{ s.name }}</p>
+    <p>Cognome: {{ s.lastname }}</p>
+    @if(s.gender == 'female'){
+      <p>Stagista</p>
+    }
+  </div> -->
+  <app-student-card [student] = 's'></app-student-card>
+}
+

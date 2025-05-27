@@ -9,4 +9,7 @@ import { Student } from '../../models/student';
 })
 export class StudentCardComponent {
   @Input('student') st!: Student;
+  onDelete() {
+	console.log("Bottone cliccato");
+  }
 }

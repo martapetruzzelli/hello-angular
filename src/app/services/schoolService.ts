@@ -1,44 +1,36 @@
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { Student } from "../models/student";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SchoolService{
-  students: Student[] = [
-    {
-      id: 1,
-      name: 'mario',
-      lastname: 'rossi',
-      gender: 'male',
-      birthDate: '2025-05-26',
-      favoriteLanguage: 'Typescript'
-    },
-    {
-      id: 2,
-      name: 'Giulia',
-      lastname: 'Bianchi',
-      gender: 'female',
-      birthDate: '2025-05-26',
-      favoriteLanguage: 'Java'
-    },
-    {
-      id: 3,
-      name: 'Luca',
-      lastname: 'Luca',
-      gender: 'male',
-      birthDate: '2025-05-26',
-      favoriteLanguage: 'Javascript'
-    }
-  ];
+  private _http = inject(HttpClient);
+  private _url = 'http://localhost:8080/api/students'; 
 
-  getStudents(): Student[]{
-    return this.students;
+  findStudents(): Observable<Student[]>{
+    // return this.students;
+    return this._http.get<Student[]>(this._url);
   }
 
-  deleteStudent(id: number): boolean {
-    const listLenBefore = this.students.length;
-    this.students = this.students.filter(s => s.id != id);
-    return listLenBefore == this.students.length;
+  findStudentById(id: number): Observable<Student> {
+    return this._http.get<Student>(`${this._url}/${id}`);
+  }
+
+  deleteStudent(id: number): Observable<void> {
+    // const listLenBefore = this.students.length;
+    // this.students = this.students.filter(s => s.id != id);
+    // return listLenBefore == this.students.length;
+    return this._http.delete<void>(`${this._url}/${id}`);
+  }
+
+  addStudent(student: Student): Observable<Student> {
+    return this._http.post<Student>(this._url, student);
+  }
+
+  updateStudent(updatedStudent: Student): Observable<void> {
+    return this._http.put<void>(`${this._url}/${updatedStudent.studentId}`, updatedStudent);
   }
 }

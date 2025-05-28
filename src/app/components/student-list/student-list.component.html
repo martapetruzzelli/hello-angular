@@ -4,7 +4,7 @@
   <p *ngIf="s.gender == 'female'">Stagista non retribuita</p>
 </div> -->
 
-@for (s of list; track s.id) {
+@for (s of students; track s.studentId) {
   <!-- <div>
     <p>Nome: {{ s.name }}</p>
     <p>Cognome: {{ s.lastname }}</p>

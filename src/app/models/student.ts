@@ -1,8 +1,8 @@
 export interface Student{
-  id: number;
-  name: string;
+  studentId: number;
+  firstname: string;
   lastname: string;
   gender: string;
-  birthDate: string;
+  birthdate: string;
   favoriteLanguage: string;
 }

@@ -41,7 +41,7 @@ export class SchoolService{
 
   deleteStudent(id:number):boolean{
     const beforeLength = this.list.length;
-    this.list = this.list.filter((s)=>{s.id != id});
+    this.list = this.list.filter((s)=>s.id != id);
     return this.list.length != beforeLength;
   }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Student } from "../models/student";
+import { StudentListComponent } from "../components/student-list/student-list.component";
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,14 @@ export class SchoolService{
   ];
 
   getStudents():Student[]{
+    // chiamata del BE
+    // cose prima 
     return this.list;
+  }
+
+  deleteStudent(id:number):boolean{
+    const beforeLength = this.list.length;
+    this.list = this.list.filter((s)=>{s.id != id});
+    return this.list.length != beforeLength;
   }
 }

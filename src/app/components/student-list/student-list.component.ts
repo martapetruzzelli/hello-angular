@@ -17,12 +17,12 @@ export class StudentListComponent implements OnInit {
   ngOnInit(): void {
     this.list = this._schoolService.getStudents();
   }
-  handleDelete(obj:{id:number; name:string}){
-    const wasDeleted = this._schoolService.deleteStudent(obj.id);
+  handleDelete({id,name}:{id:number; name:string}){
+    const wasDeleted = this._schoolService.deleteStudent(id);
     if(wasDeleted){
-      alert('abbiamo deletato lo studente: '+ obj.name);
+      alert('abbiamo deletato lo studente: '+ name);
     }else{
-      alert('Errore durante la cancellazione dello studente:' + obj.name);
+      alert('Errore durante la cancellazione dello studente:' + name);
     }
   }
 }

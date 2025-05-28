@@ -5,6 +5,7 @@
   <p>Gender: {{ st.gender }}</p>
   <p>Birth Date: {{ st.birthDate }}</p>
   <p>Favorite Language: {{ st.favoriteLanguage }}</p>
+  <button [routerLink] = "['/student-details', st.id]">Vedi dettagli</button>
   <button (click)="onDelete()">Elimina</button>
 </div>
 

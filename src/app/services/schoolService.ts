@@ -5,7 +5,7 @@ import { Student } from "../models/student";
   providedIn: 'root'
 })
 export class SchoolService{
-  list: Student[] = [
+  students: Student[] = [
     {
       id: 1,
       name: 'mario',
@@ -32,7 +32,13 @@ export class SchoolService{
     }
   ];
 
-  getStudents():Student[]{
-    return this.list;
+  getStudents(): Student[]{
+    return this.students;
+  }
+
+  deleteStudent(id: number): boolean {
+    const listLenBefore = this.students.length;
+    this.students = this.students.filter(s => s.id != id);
+    return listLenBefore == this.students.length;
   }
 }

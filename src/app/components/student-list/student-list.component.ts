@@ -3,6 +3,7 @@ import { Student } from '../../models/student';
 import { CommonModule } from '@angular/common';
 import { StudentCardComponent } from '../student-card/student-card.component';
 import { SchoolService } from '../../services/schoolService';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-student-list',
@@ -14,15 +15,32 @@ export class StudentListComponent implements OnInit {
   list: Student[] = [];
   constructor(private _schoolService: SchoolService){
   }
+  
   ngOnInit(): void {
-    this.list = this._schoolService.getStudents();
+    this.loadStudents();
   }
-  handleDelete({id,name}:{id:number; name:string}){
-    const wasDeleted = this._schoolService.deleteStudent(id);
-    if(wasDeleted){
-      alert('abbiamo deletato lo studente: '+ name);
-    }else{
-      alert('Errore durante la cancellazione dello studente:' + name);
-    }
+
+  handleDelete(obj:{id:number; name:string}){
+    this._schoolService.deleteStudent(obj.id).subscribe({
+      next: () => {
+        alert('abbiamo deletato lo studente: '+ obj.name);
+        this.list = this.list.filter(s => s.id != obj.id);
+      },
+      error: e => {
+        alert("errore durante la cancellazione dello studente: " + e);
+        this.loadStudents();
+      }
+    });
+  }
+  
+  loadStudents(){
+    const studentsObservable: Observable<Student[]> = this._schoolService.getStudents();
+    studentsObservable.subscribe({
+      next: students => this.list = students,
+      error: e => {
+        alert(e);
+        console.log("errore: " + e);
+      }
+    });
   }
 }

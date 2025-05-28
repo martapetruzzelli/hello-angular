@@ -1,11 +1,15 @@
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { Student } from "../models/student";
 import { StudentListComponent } from "../components/student-list/student-list.component";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SchoolService{
+  private _url: string = 'http://localhost:8080/api/students'
+  private _http = inject(HttpClient);
   list: Student[] = [
     {
       id: 1,
@@ -33,15 +37,33 @@ export class SchoolService{
     }
   ];
 
-  getStudents():Student[]{
+  //constructor(private _http: HttpClient){}
+
+  getStudents(): Observable<Student[]> {
     // chiamata del BE
     // cose prima 
-    return this.list;
+    //console.log(this._http);
+    //return this.list;
+    const result = this._http.get<Student[]>(this._url);
+    return result;
   }
 
-  deleteStudent(id:number):boolean{
-    const beforeLength = this.list.length;
-    this.list = this.list.filter((s)=>{s.id != id});
-    return this.list.length != beforeLength;
+  findStudentById(id: number): Observable<Student> {
+    return this._http.get<Student>(`${this._url}/${id}`);
+  }
+
+  addStudent(student: Student): Observable<Student> {
+    return this._http.post<Student>(this._url, student);
+  }
+
+  updateStudent(updatedStudent: Student): Observable<void> {
+    return this._http.put<void>(`${this._url}/${updatedStudent.id}`, updatedStudent);
+  }
+
+  deleteStudent(id:number): Observable<void> {
+    // const beforeLength = this.list.length;
+    // this.list = this.list.filter((s)=>s.id != id);
+    // return this.list.length != beforeLength;
+    return this._http.delete<void>(`${this._url}/${id}`);
   }
 }

@@ -1,5 +1,6 @@
 import { inject, Injectable } from "@angular/core";
 import { Student } from "../models/student";
+import { StudentListComponent } from "../components/student-list/student-list.component";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 
@@ -7,9 +8,8 @@ import { Observable } from "rxjs";
   providedIn: 'root'
 })
 export class SchoolService{
-  private _url = "hhtp://localhost:8080/api/students";
+  private _url: string = 'http://localhost:8080/api/students'
   private _http = inject(HttpClient);
-
   list: Student[] = [
     {
       id: 1,
@@ -37,30 +37,33 @@ export class SchoolService{
     }
   ];
 
-  // constructor(private _http: HttpClient){ }
+  //constructor(private _http: HttpClient){}
 
-  getStudents():Observable<Student[]>{
-    console.log(this._http);
+  getStudents(): Observable<Student[]> {
+    // chiamata del BE
+    // cose prima
+    //console.log(this._http);
+    //return this.list;
     const result = this._http.get<Student[]>(this._url);
     return result;
   }
 
-  findStudentById(id:number): Observable<Student> {
+  findStudentById(id: number): Observable<Student> {
     return this._http.get<Student>(`${this._url}/${id}`);
   }
 
-  addStudent(student: Student): Observable<Student>{
+  addStudent(student: Student): Observable<Student> {
     return this._http.post<Student>(this._url, student);
   }
 
-  updateStudent(student: Student): Observable<void> {
-    return this._http.put<void>(`${this._url}/${student.id}`, student)
+  updateStudent(updatedStudent: Student): Observable<void> {
+    return this._http.put<void>(`${this._url}/${updatedStudent.id}`, updatedStudent);
   }
 
-  deleteStudent(id:number):Observable<void>{
-    // const lengthBefore = this.list.length;
-    // this.list = this.list.filter(s => s.id != id);
-    // return this.list.length != lengthBefore;
+  deleteStudent(id:number): Observable<void> {
+    // const beforeLength = this.list.length;
+    // this.list = this.list.filter((s)=>s.id != id);
+    // return this.list.length != beforeLength;
     return this._http.delete<void>(`${this._url}/${id}`);
   }
 }

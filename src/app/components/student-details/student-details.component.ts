@@ -10,7 +10,7 @@ import { find } from 'rxjs';
   templateUrl: './student-details.component.html',
   styleUrl: './student-details.component.css'
 })
-export class StudentDetailsComponent implements OnInit{
+export class StudentDetailsComponent implements OnInit {
   student!: Student;
   private _route = inject(ActivatedRoute);
   private _service = inject(SchoolService);
@@ -18,7 +18,7 @@ export class StudentDetailsComponent implements OnInit{
   ngOnInit(): void {
     const id = this._route.snapshot.paramMap.get("id");
     if(id != null){
-      const studentId = Number(id); //+ davanti alla var es +id trasforma una stringa in un intero
+      const studentId = +id; //potevo fare anche Number(id) per rendere la string un number
       this.findStudent(studentId);
     }
   }

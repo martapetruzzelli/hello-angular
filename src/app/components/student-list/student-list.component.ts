@@ -15,33 +15,32 @@ export class StudentListComponent implements OnInit {
   list: Student[] = [];
   constructor(private _schoolService: SchoolService){
   }
+
   ngOnInit(): void {
     this.loadStudents();
   }
 
-  handleDelete(obj:{id:number, name:string}){ //{id,name}:{id:number; name:string}
-    const {id, name} = obj;
-    this._schoolService.deleteStudent(id).subscribe({
+  handleDelete(obj:{id:number; name:string}){
+    this._schoolService.deleteStudent(obj.id).subscribe({
       next: () => {
-        alert("deletato studente " + name);
+        alert('abbiamo deletato lo studente: '+ obj.name);
         this.list = this.list.filter(s => s.id != obj.id);
       },
       error: e => {
-        alert("errore nell'eliminazione dello studente " + name);
+        alert("errore durante la cancellazione dello studente: " + e);
         this.loadStudents();
       }
     });
   }
 
   loadStudents(){
-    const studentObservable: Observable<Student[]> = this._schoolService.getStudents();
-    studentObservable.subscribe({
-      next: (students)=> this.list = students,
+    const studentsObservable: Observable<Student[]> = this._schoolService.getStudents();
+    studentsObservable.subscribe({
+      next: students => this.list = students,
       error: e => {
         alert(e);
-        console.log("errore " + e);
+        console.log("errore: " + e);
       }
-    })
+    });
   }
-
 }

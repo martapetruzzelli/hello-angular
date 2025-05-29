@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Student } from '../../models/student';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SchedulerAction } from 'rxjs';
 import { SchoolService } from '../../services/schoolService';
 
@@ -10,26 +10,32 @@ import { SchoolService } from '../../services/schoolService';
   templateUrl: './student-details.component.html',
   styleUrl: './student-details.component.css'
 })
+
 export class StudentDetailsComponent implements OnInit {
-  student! :Student;
+  student!: Student;
   private _route = inject(ActivatedRoute);
   private _service = inject(SchoolService);
+  private _router = inject(Router);
 
   ngOnInit(): void {
-    const id = this._route.snapshot.paramMap.get("id"); // in questo momento prendi il dato che hai e dammelo
-    if(id != null){
-      const studentID = +id;
+    const id = this._route.snapshot.paramMap.get("id"); // snapshot(controlla l url per sapere com è in questo momento ) in questo momento prendi il dato che hai e dammelo
+    if (id != null) {
+      const studentID = +id; // potevo farlo anche NUmber(id) per castare da string a number al posto del +id
       this.findStudent(studentID);
-    } 
+    }
   }
 
 
-   findStudent(id:number){
+  findStudent(id: number) {
     this._service.findStudentById(id).subscribe({
       next: s => this.student = s,
       error: e => alert("Errore nell caricamento dello studente")
     })
-   }
+  }
 
+   // Navigazione programmatica
+  navigateToEdit() {
+    this._router.navigate(['/edit-student-form-template', this.student.id]); // navigate ci permette di nav
+  }
 
 }

@@ -62,7 +62,7 @@ export class SchoolService{
     return this._http.delete<void>(`${this._url}/${id} `)
   }
 
-  addStudent(student: Student): Observable<Student>{
+  addStudent(student:Partial<Student>): Observable<Student>{
     return this._http.post<Student>(this._url, student);
   }
 

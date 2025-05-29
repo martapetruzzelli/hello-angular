@@ -1,0 +1,31 @@
+<form #f="ngForm" (submit)="onSubmit(f)">
+    <div>
+        <label for="name"> Name</label>
+        <input type="text" id="name" name="name" [(ngModel)]="student.name">
+    </div>
+
+    <div>
+        <label for="lastname"> Last Name</label>
+        <input type="text" id="lastname" name="lastname" [(ngModel)]="student.lastname">
+    </div>
+
+
+    <div>
+        <label for="gender"> Gender</label>
+        <input type="text" id="gender" name="gender" [(ngModel)]="student.gender">
+    </div>
+
+    <div>
+        <label for="birthDate"> Birth date</label>
+        <input type="datetime-local" id="birthDate" name="birthDate" [(ngModel)]="student.birthDate">
+    </div>
+
+    <div>
+        <label for="favoriteLanguage"> Favorite Language</label>
+        <input type="text" id="favoriteLanguage" name="favoriteLanguage" [(ngModel)]="student.favoriteLanguage">
+    </div>
+
+    <button type="submit">Submit</button>
+
+
+</form>

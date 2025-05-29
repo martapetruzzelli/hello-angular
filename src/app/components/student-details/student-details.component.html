@@ -1,3 +1,7 @@
-<h2>Id: {{ st.studentId }}</h2>
-<p>Name: {{ st.firstname }}</p>
-<p>Lastname: {{ st.lastname }}</p>
+@if (st != null) {
+    <h2>Id: {{ st.studentId }}</h2>
+    <p>Name: {{ st.firstname }}</p>
+    <p>Lastname: {{ st.lastname }}</p>
+} @else {
+    <h2>Loading student details...</h2>
+}

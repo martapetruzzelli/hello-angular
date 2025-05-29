@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Student } from '../../models/student';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { SchoolService } from '../../services/schoolService';
 import { find } from 'rxjs';
 
@@ -14,12 +14,17 @@ export class StudentDetailsComponent implements OnInit {
   student!: Student;
   private _route = inject(ActivatedRoute);
   private _service = inject(SchoolService);
+  private _router = inject(Router);
 
   ngOnInit(): void {
     const id = this._route.snapshot.paramMap.get("id");
     if(id != null){
       const studentId = +id; //potevo fare anche Number(id) per rendere la string un number
-      this.findStudent(studentId);
+      if(studentId != 0 && !isNaN(studentId)){
+        this.findStudent(studentId);
+      } else {
+        alert("id non valido");
+      }
     }
   }
 
@@ -28,6 +33,10 @@ export class StudentDetailsComponent implements OnInit {
       next: s => this.student = s,
       error: e => alert("errore nel caricamento dello studente: " + e)
     });
+  }
+
+  navigateToEdit() {
+    this._router.navigate(['/edit-student-form-template', this.student.id])
   }
 
 }

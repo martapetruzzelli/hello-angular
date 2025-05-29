@@ -1,0 +1,17 @@
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" [(ngModel)]="student.name">
+
+  <label for="lastname">Lastname:</label>
+  <input type="text" id="lastname" name="lastname" [(ngModel)]="student.lastname">
+
+  <label for="gender">Gender:</label>
+  <input type="text" id="gender" name="gender" [(ngModel)]="student.gender">
+
+  <label for="birthDate">Birth Date:</label>
+  <input type="date" id="birthDate" name="birthDate" [(ngModel)]="student.birthDate">
+
+  <label for="favoriteLanguage">Favorite Language:</label>
+  <input type="text" id="favoriteLanguage" name="favoriteLanguage" [(ngModel)]="student.favoriteLanguage">
+  <button type="submit">Submit</button>
+</form>

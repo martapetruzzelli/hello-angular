@@ -16,6 +16,5 @@ export class StudentCardComponent { //Dumb component (non farà logica)
     this.deleteStudent.emit({id:this.st.id, name:this.st.name});
   }
   showDetails(){
-
   }
 }

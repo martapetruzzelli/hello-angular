@@ -9,5 +9,6 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'student-list', component: StudentListComponent },
   { path: 'student-details/:id', component: StudentDetailsComponent },
-  { path: 'add-student-form-template', component: AddStudentFormTemplateComponent }
+  { path: 'add-student-form-template', component: AddStudentFormTemplateComponent },
+  { path: 'edit-student-form-template/:id', component: AddStudentFormTemplateComponent }
 ];

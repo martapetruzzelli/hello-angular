@@ -3,6 +3,7 @@
     <p>Name: {{ student.name }}</p>
     <p>Birth Date: {{ student.birthDate }}</p>
     <p>Favorite Language: {{ student.favoriteLanguage }}</p>
+    <button (click)="navigateToEdit()">Update student</button>
 } @else {
     <h2>Caricando lo studente...</h2>
 }

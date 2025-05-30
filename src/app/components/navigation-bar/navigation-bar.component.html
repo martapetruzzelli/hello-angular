@@ -2,6 +2,15 @@
   <ul>
     <li><a routerLink="home">Home</a></li>
     <li><a routerLink="student-list">Student List</a></li>
-    <li><a routerLink="add-student-form-template">Add Student</a></li>
+    <li><a routerLink="add-student-form-template">Add Student (template)</a></li>
+    <li><a routerLink="add-student-form-reactive">Add Student (reactive)</a></li>
   </ul>
 </nav>
+
+<h1>
+  @if (student != null) {
+    pure qui il nome è {{student.name}}
+  }@else {
+    anche qui non è selezionato
+  }
+</h1>

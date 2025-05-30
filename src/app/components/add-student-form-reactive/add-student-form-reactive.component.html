@@ -1,0 +1,79 @@
+<form [formGroup]="studentForm" (ngSubmit)="onSubmit()" noValidate>
+    <div>
+        <div class="inputdiv">  <!-- classe css  non Angular-->
+            <label for="name">Name: </label>
+            <input type="text" id="name" formControlName="name"> 
+        </div>
+        @if(name?.invalid && name?.touched){
+            <div>
+                <u>
+                    inserire un nome
+                </u>
+            </div>
+        }
+    </div>
+    
+    <div>
+        <div class="inputdiv"><!-- classe css  non Angular-->
+            <label for="lastname">Lastname: </label>
+            <input type="text" id="lastname" formControlName="lastname">
+        </div>
+        @if(lastname?.invalid && lastname?.touched){
+            <div>
+                <u>
+                    inserire un cognome
+                </u>
+            </div>
+        }
+    </div>
+    
+    <div>
+        <div class="inputdiv"><!-- classe css  non Angular-->
+            <label for="gender">Gender: </label>
+            <input type="text" id="gender" formControlName="gender">
+        </div>
+        @if(gender?.invalid && gender?.touched){
+            <div>
+                <u>
+                    inserire un genere
+                </u>
+            </div>
+        }
+    </div>
+
+    <div>
+        <div class="inputdiv"><!-- classe css  non Angular-->
+            <label for="birthdate">Birthdate: </label>
+            <input type="date" id="birthdate" formControlName="birthDate">
+        </div>
+        @if(birthDate?.hasError("required") && birthDate?.touched){
+            <div>
+                <u>
+                    la data è obbligatoria terun
+                </u>
+            </div>
+        }@if(birthDate?.hasError("dateInFuture") && birthDate?.touched){
+            <div>
+                <u>
+                    inserire una data che sia prima di domani
+                </u>
+            </div>
+        }
+    </div>
+
+    <div>
+        <div class="inputdiv"><!-- classe css  non Angular-->
+            <label for="favoriteLanguage">Favorite Language: </label>
+            <input type="text" id="favoriteLanguage" formControlName="favoriteLanguage">
+        </div>
+        @if (favoriteLanguage?.invalid && favoriteLanguage?.touched) {
+            <div>
+                <u>
+                    inseirire un linguaggio preferito
+                </u>
+            </div>
+        }
+    </div>
+
+    <button type="submit" [disabled]="studentForm.invalid">Submit</button>
+</form>

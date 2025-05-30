@@ -16,6 +16,7 @@ export class AddStudentFormTemplateComponent implements OnInit{
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
   private _isUpdate = false;
+  today = new Date().toISOString().split('T')[0];
 
   ngOnInit(): void {
     const id = this._route.snapshot.paramMap.get("id");
@@ -32,7 +33,6 @@ export class AddStudentFormTemplateComponent implements OnInit{
   }
 
   onSubmit(f: NgForm) {
-    console.log(f.value);
     if(!this._isUpdate) {
       this._service.addStudent(this.student).subscribe({
         next: s => {

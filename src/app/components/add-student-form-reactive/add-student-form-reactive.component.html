@@ -1,86 +1,79 @@
-<form [formGroup]="studentForm" (ngSubmit)="onSubmit">
-     
+<form [formGroup]="studentForm" (ngSubmit)="onSubmit()" noValidate>
     <div>
-         <div>
+        <div class="inputdiv">  <!-- classe css  non Angular-->
             <label for="name">Name: </label>
-            <input type="text" id="name" formControlName(name)> 
+            <input type="text" id="name" formControlName="name"> 
         </div>
-        @if(name?.invalid&& name?.touched){
+        @if(name?.invalid && name?.touched){
             <div>
-            <ul>
                 <u>
-                    Inserire un nome
+                    inserire un nome
                 </u>
-            </ul>
-        </div>
+            </div>
         }
-        
     </div>
-   
-
+    
     <div>
-        <label for="lastname">Lastname: </label>
-        <input type="text" id="lastname" formControlName(lastname)>
+        <div class="inputdiv"><!-- classe css  non Angular-->
+            <label for="lastname">Lastname: </label>
+            <input type="text" id="lastname" formControlName="lastname">
+        </div>
+        @if(lastname?.invalid && lastname?.touched){
+            <div>
+                <u>
+                    inserire un cognome
+                </u>
+            </div>
+        }
     </div>
-       
-        
+    
     <div>
-        <div>
+        <div class="inputdiv"><!-- classe css  non Angular-->
             <label for="gender">Gender: </label>
-            <input type="text" id="gender" formControlName(gender)>
+            <input type="text" id="gender" formControlName="gender">
         </div>
-        @if(gender?.hasError("required") && gender?.touched){
+        @if(gender?.invalid && gender?.touched){
             <div>
-                <ul>
-                    <u>
-                        Il campo è obbligatorio
-                    </u>
-                </ul>
+                <u>
+                    inserire un genere
+                </u>
             </div>
         }
-
     </div>
-    
-   
+
     <div>
-        <div>
+        <div class="inputdiv"><!-- classe css  non Angular-->
             <label for="birthdate">Birthdate: </label>
-            <input type="date" id="birthdate" formControlName(birthdate)>
+            <input type="date" id="birthdate" formControlName="birthDate">
         </div>
-        <div>
-            @if(birthdate?.hasError("required") && birthdate?.touched){
-                <div>
-                    <ul>
-                        <u>La data è obbligatoria</u>
-                    </ul>
-                </div>
-            }@if(birthdate?.hasError("dateInFuture") && birthdate?.touched){
-                <div>
-                    <ul>
-                        <u>Non è una macchina del tempo</u>
-                    </ul>
-                </div>
-            }
-        </div>
-
-    </div>
-    
-
-    <div>
-        <div>
-            <label for="favoriteLanguage">Favorite Language: </label>
-            <input type="text" id="favoriteLanguage" formControlName(favoriteLanguage)>
-        </div>
-        @if(favoriteLanguage?.hasError("required") && favoriteLanguage?.touched){
+        @if(birthDate?.hasError("required") && birthDate?.touched){
             <div>
-                <ul>
-                    <u>Ilcampo è obbligatorio</u>
-                </ul>
+                <u>
+                    la data è obbligatoria terun
+                </u>
+            </div>
+        }@if(birthDate?.hasError("dateInFuture") && birthDate?.touched){
+            <div>
+                <u>
+                    inserire una data che sia prima di domani
+                </u>
             </div>
         }
-        
     </div>
-    
+
+    <div>
+        <div class="inputdiv"><!-- classe css  non Angular-->
+            <label for="favoriteLanguage">Favorite Language: </label>
+            <input type="text" id="favoriteLanguage" formControlName="favoriteLanguage">
+        </div>
+        @if (favoriteLanguage?.invalid && favoriteLanguage?.touched) {
+            <div>
+                <u>
+                    inseirire un linguaggio preferito
+                </u>
+            </div>
+        }
+    </div>
 
     <button type="submit" [disabled]="studentForm.invalid">Submit</button>
 </form>

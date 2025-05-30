@@ -1,0 +1,9 @@
+.inputdiv{
+    display: flex;
+    flex-direction: column;
+}
+.inputdiv input{
+    width: 25%;
+}u{
+    color: rgb(186, 0, 0);
+}

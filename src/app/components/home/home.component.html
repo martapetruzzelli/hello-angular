@@ -1,2 +1,4 @@
-<button>Selexiona il prossimo studente</button>
-<button>Cancella la selezione</button>
+<button (click)="buttonSelectClick()">Seleziona il prossimo studente</button>
+<!-- quando schiaccio seleziona il primo studente, poi il secondo etc... al ultimo resetta e torna al primo -->
+<button (click)="buttonResetClick()">Cancella la selezione</button>
+<!-- cancella la selezione  -->

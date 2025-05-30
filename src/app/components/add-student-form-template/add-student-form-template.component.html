@@ -1,29 +1,38 @@
 <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <div>
         <label for="name">Name: </label>
-        <input type="text" id="name" name="name" [(ngModel)]="student.name"> 
+        <input type="text" id="name" name="name" #name="ngModel" [(ngModel)]="student.name" required> 
     </div>
+    @if (name.invalid && name.touched) {
+        <div>
+            <p>Inserire nome</p>
+        </div>
+    }
     <!-- [()] "Banana in the box" -> binding bidirezionale -> () da html a TS, [] da TS a html -->
 
     <div>
         <label for="lastname">Lastname: </label>
-        <input type="text" id="lastname" name="lastname" [(ngModel)]="student.lastname">
+        <input type="text" id="lastname" name="lastname" #lastname="ngModel" [(ngModel)]="student.lastname" required>
     </div>
 
     <div>
         <label for="gender">Gender: </label>
-        <input type="text" id="gender" name="gender" [(ngModel)]="student.gender">
+        <input type="text" id="gender" name="gender"  #gender="ngModel" [(ngModel)]="student.gender" required>
     </div>
 
     <div>
         <label for="birthdate">Birthdate: </label>
-        <input type="date" id="birthdate" name="birthdate" [(ngModel)]="student.birthDate">
+        <input type="date" id="birthdate" name="birthdate"  #birthdate="ngModel" [(ngModel)]="student.birthDate" required [attr.max] = "today">
     </div>
-
+    @if (birthdate.errors?.["required"] && birthdate.touched) {
+        <div>
+            <p>Inserire una data</p>
+        </div>
+    }
     <div>
         <label for="favoriteLanguage">Favorite Language: </label>
-        <input type="text" id="favoriteLanguage" name="favoriteLanguage" [(ngModel)]="student.favoriteLanguage">
+        <input type="text" id="favoriteLanguage" name="favoriteLanguage"  #favoriteLanguage="ngModel" [(ngModel)]="student.favoriteLanguage" required>
     </div>
 
-    <button type="submit">Submit</button>
+    <button type="submit" [disabled]="f.invalid">Submit</button>
 </form>

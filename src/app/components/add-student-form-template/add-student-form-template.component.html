@@ -1,8 +1,13 @@
 <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <div>
         <label for="name">Name: </label>
-        <input type="text" id="name" name="name" [(ngModel)]="student.name"> 
+        <input type="text" id="name" name="name" [(ngModel)]="student.name"  #name="ngModel> 
     </div>
+    @if(){
+        <div>
+            <p>Inserire nome</p>
+        </div>
+    }
     <!-- [()] "Banana in the box" -> binding bidirezionale -> () da html a TS, [] da TS a html -->
 
     <div>
@@ -12,18 +17,18 @@
 
     <div>
         <label for="gender">Gender: </label>
-        <input type="text" id="gender" name="gender" [(ngModel)]="student.gender">
+        <input type="text" id="gender" name="gender" [(ngModel)]="student.gender" required>
     </div>
 
     <div>
         <label for="birthdate">Birthdate: </label>
-        <input type="date" id="birthdate" name="birthdate" [(ngModel)]="student.birthDate">
+        <input type="date" id="birthdate" name="birthdate" [(ngModel)]="student.birthDate" required[attr.max] = "today">
     </div>
 
     <div>
         <label for="favoriteLanguage">Favorite Language: </label>
-        <input type="text" id="favoriteLanguage" name="favoriteLanguage" [(ngModel)]="student.favoriteLanguage">
+        <input type="text" id="favoriteLanguage" name="favoriteLanguage" [(ngModel)]="student.favoriteLanguage" required>
     </div>
 
-    <button type="submit">Submit</button>
+    <button type="submit" [disabled]="f.invalid">Submit</button>
 </form>

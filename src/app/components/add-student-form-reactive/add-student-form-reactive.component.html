@@ -1,0 +1,86 @@
+<form [formGroup]="studentForm" (ngSubmit)="onSubmit">
+     
+    <div>
+         <div>
+            <label for="name">Name: </label>
+            <input type="text" id="name" formControlName(name)> 
+        </div>
+        @if(name?.invalid&& name?.touched){
+            <div>
+            <ul>
+                <u>
+                    Inserire un nome
+                </u>
+            </ul>
+        </div>
+        }
+        
+    </div>
+   
+
+    <div>
+        <label for="lastname">Lastname: </label>
+        <input type="text" id="lastname" formControlName(lastname)>
+    </div>
+       
+        
+    <div>
+        <div>
+            <label for="gender">Gender: </label>
+            <input type="text" id="gender" formControlName(gender)>
+        </div>
+        @if(gender?.hasError("required") && gender?.touched){
+            <div>
+                <ul>
+                    <u>
+                        Il campo è obbligatorio
+                    </u>
+                </ul>
+            </div>
+        }
+
+    </div>
+    
+   
+    <div>
+        <div>
+            <label for="birthdate">Birthdate: </label>
+            <input type="date" id="birthdate" formControlName(birthdate)>
+        </div>
+        <div>
+            @if(birthdate?.hasError("required") && birthdate?.touched){
+                <div>
+                    <ul>
+                        <u>La data è obbligatoria</u>
+                    </ul>
+                </div>
+            }@if(birthdate?.hasError("dateInFuture") && birthdate?.touched){
+                <div>
+                    <ul>
+                        <u>Non è una macchina del tempo</u>
+                    </ul>
+                </div>
+            }
+        </div>
+
+    </div>
+    
+
+    <div>
+        <div>
+            <label for="favoriteLanguage">Favorite Language: </label>
+            <input type="text" id="favoriteLanguage" formControlName(favoriteLanguage)>
+        </div>
+        @if(favoriteLanguage?.hasError("required") && favoriteLanguage?.touched){
+            <div>
+                <ul>
+                    <u>Ilcampo è obbligatorio</u>
+                </ul>
+            </div>
+        }
+        
+    </div>
+    
+
+    <button type="submit" [disabled]="studentForm.invalid">Submit</button>
+</form>

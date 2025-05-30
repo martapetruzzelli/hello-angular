@@ -16,6 +16,7 @@ export class AddStudentFormTemplateComponent implements OnInit{
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
   private _isUpdate = false;
+  today = new Date().toISOString().split("T");
 
   ngOnInit(): void {
     const id = this._route.snapshot.paramMap.get("id");

@@ -33,6 +33,7 @@ export class StudentListComponent implements OnInit {
     });
   }
 
+
   loadStudents(){
      const studentObservable: Observable<Student[]> = this._schoolService.getStudents();
     studentObservable.subscribe({

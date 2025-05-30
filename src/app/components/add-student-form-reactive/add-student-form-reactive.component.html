@@ -1,0 +1,86 @@
+<form [formGroup]="studentForm" (ngSubmit)="onSubmit()" noValidate>
+    <div>
+        <div class="inputdiv">
+            <label for="name"> Name</label>
+            <input type="text" id="name" formControlName="name">
+        </div>
+        @if(name?.invalid && name?.touched){
+        <div>
+            <u>
+                inserire un nome
+            </u>
+        </div>
+        }
+
+    </div>
+
+
+    <div>
+        <div class="inputdiv">
+            <label for="lastname"> Last Name</label>
+            <input type="text" id="lastname" formControlName="lastname">
+        </div>
+        @if(lastname?.invalid && lastname?.touched){
+        <div>
+            <u>
+                inserire un cognome
+            </u>
+        </div>
+        }
+    </div>
+
+    <div>
+        <div class="inputdiv">
+            <label for="gender"> Gender</label>
+            <input type="text" id="gender" formControlName="gender">
+        </div>
+        @if(gender?.invalid && gender?.touched){
+        <div>
+            <u>
+                inserire un gender
+            </u>
+        </div>
+        }
+    </div>
+
+
+    <div>
+        <div class="inputdiv">
+            <label for="birthdate"> BirthDate</label>
+            <input type="datetime-local" id="birthdate" formControlName="birthDate">
+        </div>
+        @if(birthDate?.hasError("required") && birthDate?.touched){
+        <div>
+            <u>
+                la data è obbligatoria
+            </u>
+        </div>
+        }
+        @if(birthDate?.hasError("dateInFuture") && birthDate?.touched){
+        <div>
+            <u>
+                La data deve essere che sia prima di domani
+            </u>
+        </div>
+        }
+    </div>
+
+
+    <div>
+        <div class="inputdiv">
+            <label for="favoriteLanguage"> Favorite Language</label>
+            <input type="text" id="favoriteLanguage" formControlName="favoriteLanguage">
+        </div>
+        @if(favoriteLanguage?.invalid && favoriteLanguage?.touched){
+        <div>
+            <u>
+                inserire un linguaggio preferito corretto
+            </u>
+        </div>
+        }
+    </div>
+
+
+    <button type="submit" [disabled]="studentForm.invalid">Submit</button>
+
+</form>

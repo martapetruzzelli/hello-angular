@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterModule } from '@angular/router';
+import { DataService } from '../../services/dataService';
+import { Student } from '../../models/student';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -8,5 +10,11 @@ import { RouterLink, RouterModule } from '@angular/router';
   styleUrl: './navigation-bar.component.css'
 })
 export class NavigationBarComponent {
-
+  private _dataService = inject(DataService);
+	student:Student|null = null;
+	ngOnInit(): void {
+		this._dataService.selectedStudentObservable.subscribe(
+			student => this.student = student
+		);
+	}
 }

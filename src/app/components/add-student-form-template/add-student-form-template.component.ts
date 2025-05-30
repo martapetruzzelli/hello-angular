@@ -11,11 +11,13 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './add-student-form-template.component.css'
 })
 export class AddStudentFormTemplateComponent implements OnInit {
+  student: Partial<Student> = { name: "", lastname: "", gender: "", birthDate: "", favoriteLanguage: "" }
   private _service = inject(SchoolService);
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
   private _isUpdate = false;
-  student: Partial<Student> = { name: "", lastname: "", gender: "", birthDate: "", favoriteLanguage: "" }
+  today = new Date().toISOString().split('T')[0];
+  
 
 
   ngOnInit(): void {
@@ -32,7 +34,8 @@ export class AddStudentFormTemplateComponent implements OnInit {
   }
 
   onSubmit(f: NgForm) {
-    console.log(this.student)
+    console.log(f.value);
+    console.log(f.value.birthDate.errors);
 
     if (!this._isUpdate) {
       this._service.addStudent(this.student).subscribe({

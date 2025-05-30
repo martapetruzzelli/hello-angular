@@ -1,3 +1,8 @@
 <footer>
   <p>copyright javita 144</p>
+  @if(student != null){
+    <h1>Il nome dello studente selezionato è {{student.name}}</h1>
+  } @else {
+    <h1>Non è stato selezionato nessun studente </h1>
+  }
 </footer>

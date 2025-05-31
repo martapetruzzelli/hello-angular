@@ -18,8 +18,8 @@ export class AddStudentFormReactiveComponent {
 	// 	gender:new FormControl<string>(""),
 	// 	birthDate:new FormControl<string>(""),
 	// 	favoriteLanguage:new FormControl<string>(""),
-	// }
-	// );
+	// });
+	
 	formBuilder = inject(FormBuilder);
 	studentForm:FormGroup;
 	private _schoolService = inject(SchoolService);
